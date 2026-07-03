@@ -6,17 +6,18 @@
 
 <body>
 
-<h1>Smitten Kittens</h1> <!--HOME PAGE-->
+<h1>Smitten Kittens</h1>  <!--HOME PAGE-->
 
 <a href="/admin/">Go to Admin</a>  <!--Easy link to admin page-->
 
 <hr>
 
-{% for listing in listings %} <!-- Loop through listings passed from views context -->
+<!-- Loop through listings passed from views context -->
+{% for listing in listings %}  
 
     <div>
 
-        <h2>Listing #{{ listing.id }}</h2> <!--title for listing-->
+        <h2>Listing #{{ listing.id }}</h2> 
             <!--Show listing info-->
         <p><strong>Owner:</strong> {{ listing.owner.username }}<br>
         <strong>Posted:</strong> {{ listing.created_date }}</p>
@@ -25,12 +26,16 @@
         {% for kitten in listing.kittens.all %}
 
             <div>
+            
                     <!--Show kitten info-->
-                <h3>{{ kitten.name }}</h3>
+                <a href="{% url 'kitten_detail' kitten.pk %}">  <!-- Make the kitten name clickable -->
+                <h3>{{ kitten.name }}</h3></a>
+
+                <!--Ask for a photo, if none is given, go to default-->
+                <img src="{{ kitten.photo.url }}" width="400">  
+
                 <p>{{ kitten.description }}</p>
-
-                <img src="{{ kitten.photo.url }}" width="200"> <!--Asks for a photo, if none is given, goes to default-->
-
+            
             </div>
 
         {% empty %}
@@ -39,7 +44,7 @@
 
     </div>
 
-    <hr>
+<hr>
 
 {% empty %}
 

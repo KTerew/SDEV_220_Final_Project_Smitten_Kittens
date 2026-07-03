@@ -1,0 +1,17 @@
+<title>Smitten Kittens</title>
+
+<h1>{{ kitten.name }}</h1>
+
+<h3>Listed by {{ kitten.listing.owner.username }}</h3>
+
+<img src="{{ kitten.photo.url }}", width="500">
+
+<p><strong>Status:</strong>  
+{% if kitten.available %}
+    Available
+{% else %}
+    Adopted
+{% endif %} 
+</p>
+
+<p>{{ kitten.description }}</p>
