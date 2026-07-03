@@ -5,10 +5,22 @@
 </head>
 
 <body>
+<nav>
+    <a href="/">Home</a> <!--Navigation Bar at top of page-->
+
+    {% if user.is_authenticated %}
+        <span>{{ user.username|capfirst }}</span>
+        <a href="/admin/">Admin</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="/admin/">Admin</a>
+    {% endif %}
+</nav>
+
+</nav>
 
 <h1>Smitten Kittens</h1>  <!--HOME PAGE-->
-
-<a href="/admin/">Go to Admin</a>  <!--Easy link to admin page-->
 
 <hr>
 
@@ -51,4 +63,12 @@
     <p>No listings yet.</p>
 
 {% endfor %}
+
+<!-- Logout button-->
+
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
 

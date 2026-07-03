@@ -1,0 +1,26 @@
+<!--Login page-->
+<title>Smitten Kittens</title>
+<h1>Login</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Login</button>
+</form>
+
+<!--http://127.0.0.1:8000/accounts/login/-->
+
+<!-- When ready to customize form with css take out
+ 
+  {{form_as_p}}
+
+    and add:
+    
+    <label>Username</label>
+    {{ form.username }}
+
+    <label>Password</label>
+    {{ form.password }}
+-->
