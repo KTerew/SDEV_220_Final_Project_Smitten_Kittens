@@ -17,9 +17,9 @@
 
     <div>
 
-        <h2>Listing #{{ listing.id }}</h2> 
+        <h2>Listing # {{ listing.id }}</h2> 
             <!--Show listing info-->
-        <p><strong>Owner:</strong> {{ listing.owner.username }}<br>
+        <p><strong>Owner:</strong> {{ listing.owner.username|title }}<br>
         <strong>Posted:</strong> {{ listing.created_date }}</p>
 
             <!--Loop through all kittens in listings-->
@@ -29,7 +29,7 @@
             
                     <!--Show kitten info-->
                 <a href="{% url 'kitten_detail' kitten.pk %}">  <!-- Make the kitten name clickable -->
-                <h3>{{ kitten.name }}</h3></a>
+                <h3>{{ kitten.name|title }}</h3></a>
 
                 <!--Ask for a photo, if none is given, go to default-->
                 <img src="{{ kitten.photo.url }}" width="400">  

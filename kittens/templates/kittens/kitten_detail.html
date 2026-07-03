@@ -1,8 +1,8 @@
 <title>Smitten Kittens</title>
 
-<h1>{{ kitten.name }}</h1>
+<h1>{{ kitten.name|title }}</h1>
 
-<h3>Listed by {{ kitten.listing.owner.username }}</h3>
+<h3>Listed by {{ kitten.listing.owner.username|title }}</h3>
 
 <img src="{{ kitten.photo.url }}", width="500">
 
