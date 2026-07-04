@@ -25,6 +25,7 @@ class Kitten(models.Model):
     ]
     gender = models.CharField(max_length=1,choices=GENDER_CHOICES,blank=True)
     spayed = models.BooleanField(default=False)
+    zipcode = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return self.name
