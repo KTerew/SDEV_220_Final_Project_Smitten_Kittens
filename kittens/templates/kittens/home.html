@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smitten Kittens</title>
+</head>
+
+<body>
+
+<h1>Smitten Kittens</h1>  <!--HOME PAGE-->
+
+<a href="/admin/">Go to Admin</a>  <!--Easy link to admin page-->
+
+<hr>
+
+<!-- Loop through listings passed from views context -->
+{% for listing in listings %}  
+
+    <div>
+
+        <h2>Listing #{{ listing.id }}</h2> 
+            <!--Show listing info-->
+        <p><strong>Owner:</strong> {{ listing.owner.username }}<br>
+        <strong>Posted:</strong> {{ listing.created_date }}</p>
+
+            <!--Loop through all kittens in listings-->
+        {% for kitten in listing.kittens.all %}
+
+            <div>
+            
+                    <!--Show kitten info-->
+                <a href="{% url 'kitten_detail' kitten.pk %}">  <!-- Make the kitten name clickable -->
+                <h3>{{ kitten.name }}</h3></a>
+
+                <!--Ask for a photo, if none is given, go to default-->
+                <img src="{{ kitten.photo.url }}" width="400">  
+
+                <p>{{ kitten.description }}</p>
+            
+            </div>
+
+        {% empty %}
+            <p>No kittens in this listing.</p> 
+        {% endfor %}
+
+    </div>
+
+<hr>
+
+{% empty %}
+
+    <p>No listings yet.</p>
+
+{% endfor %}
+
