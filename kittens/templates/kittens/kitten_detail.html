@@ -17,4 +17,22 @@
 {% endif %} 
 </p>
 
+<!--Right now zipcodes are optional for testing-->
+{% if city and state %}
+    <p>{{ city }}, {{ state }}</p>
+{% endif %}
+
+<!--If left blank then doesn't show on page-->
+{% if kitten.gender %}
+    <p><strong>Gender:</strong> {{ kitten.get_gender_display }}</p>
+{% endif %}
+
+<p><strong>Spayed/Neutered:</strong>
+    {% if kitten.spayed %}
+        Yes
+    {% else %}
+        No
+    {% endif %}
+</p>
+
 <p>{{ kitten.description }}</p>
