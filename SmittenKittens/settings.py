@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kittens',
+    'kittens', 'accounts',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +122,6 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = "/media/"  # uploaded user files (images)
 MEDIA_ROOT = BASE_DIR / "media"  # where uploaded images are stored
+
+LOGIN_REDIRECT_URL = "/"  # Redirects after login -> home
+LOGOUT_REDIRECT_URL = "/"  # Redirects after logout -> home

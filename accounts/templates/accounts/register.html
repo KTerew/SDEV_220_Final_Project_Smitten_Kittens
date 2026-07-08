@@ -1,0 +1,28 @@
+<!-- Registration page for new users -->
+ <title>Smitten Kittens</title>
+
+<h1>Register</h1>
+
+<form method="POST">
+    {% csrf_token %}  <!-- Protects form from security attacks -->
+    {{ form.as_p}}  <!-- Django auto builds the form fields -->
+    <button type="submit">Create Account</button>
+</form>
+
+<!--http://127.0.0.1:8000/accounts/register/-->
+
+<!-- When ready to customize form with css take out
+ 
+  {{form_as_p}}
+
+    and add:
+    
+    <label>Username</label>
+    {{ form.username }}
+
+    <label>Password</label>
+    {{ form.password1 }}
+
+    <label>Confirm Password</label>
+    {{ form.password2 }}
+-->

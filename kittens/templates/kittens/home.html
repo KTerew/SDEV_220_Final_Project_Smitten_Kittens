@@ -5,10 +5,22 @@
 </head>
 
 <body>
+<nav>
+    <a href="/">Home</a> <!--Navigation Bar at top of page-->
+
+    {% if user.is_authenticated %}
+        <span>{{ user.username|capfirst }}</span>
+        <a href="/admin/">Admin</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="/admin/">Admin</a>
+    {% endif %}
+</nav>
+
+</nav>
 
 <h1>Smitten Kittens</h1>  <!--HOME PAGE-->
-
-<a href="/admin/">Go to Admin</a>  <!--Easy link to admin page-->
 
 <hr>
 
@@ -17,9 +29,9 @@
 
     <div>
 
-        <h2>Listing #{{ listing.id }}</h2> 
+        <h2>Listing # {{ listing.id }}</h2> 
             <!--Show listing info-->
-        <p><strong>Owner:</strong> {{ listing.owner.username }}<br>
+        <p><strong>Owner:</strong> {{ listing.owner.username|title }}<br>
         <strong>Posted:</strong> {{ listing.created_date }}</p>
 
             <!--Loop through all kittens in listings-->
@@ -29,7 +41,7 @@
             
                     <!--Show kitten info-->
                 <a href="{% url 'kitten_detail' kitten.pk %}">  <!-- Make the kitten name clickable -->
-                <h3>{{ kitten.name }}</h3></a>
+                <h3>{{ kitten.name|title }}</h3></a>
 
                 <!--Ask for a photo, if none is given, go to default-->
                 <img src="{{ kitten.photo.url }}" width="400">  
@@ -51,4 +63,12 @@
     <p>No listings yet.</p>
 
 {% endfor %}
+
+<!-- Logout button-->
+
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
 
