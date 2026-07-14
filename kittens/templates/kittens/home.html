@@ -22,6 +22,13 @@
 
 <h1>Smitten Kittens</h1>  <!--HOME PAGE-->
 
+<h3>Add Kittens</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Listing</button>
+</form>
+
 <hr>
 
 <!-- Loop through listings passed from views context -->

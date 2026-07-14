@@ -1,0 +1,26 @@
+<h1>Add Kitten to Listing # {{ listing.id }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Save Kitten</button>
+</form>
+
+
+<h2>Kittens Added</h2>
+
+{% if kittens %}
+    <ul>
+        {% for kitten in kittens %}
+            <li>{{ kitten.name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No kittens have been added yet.</p>
+{% endif %}
+
+
+<a href="{% url 'home' %}">
+    <button type="button">Finish Listing</button>
+</a>
