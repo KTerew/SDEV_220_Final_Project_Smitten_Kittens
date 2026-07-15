@@ -1,38 +1,67 @@
-<title>Smitten Kittens</title>
-<nav>
-    <a href="/">Home</a> 
-</nav>
+{% load static %}
 
-<h1>{{ kitten.name|title }}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smitten Kittens</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
 
-<h3>Listed by {{ kitten.listing.owner.username|title }}</h3>
+<body>
+    <div class="header">
+        <nav>
+            <a href="/">Home</a> <!--Navigation Bar at top of page-->
 
-<img src="{{ kitten.photo.url }}", width="500">
+            {% if user.is_authenticated %}
+                <span>{{ user.username|capfirst }}</span>
+                <a href="/admin/">Admin</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+                <a href="/admin/">Admin</a>
+            {% endif %}
+        </nav>
+        <h1 class="title">Smitten Kittens</h1>  <!--HOME PAGE-->
+    </div>
 
-<p><strong>Status:</strong>  
-{% if kitten.available %}
-    Available
-{% else %}
-    Adopted
-{% endif %} 
-</p>
+    <div class="single_card">
+        <div class="cat_image">
+            <img src="{{ kitten.photo.url }}", width="500">
+        </div>
 
-<!--Right now zipcodes are optional for testing-->
-{% if city and state %}
-    <p>{{ city }}, {{ state }}</p>
-{% endif %}
+        <div class="cat_information">
+            <h1>{{ kitten.name|title }}</h1>
 
-<!--If left blank then doesn't show on page-->
-{% if kitten.gender %}
-    <p><strong>Gender:</strong> {{ kitten.get_gender_display }}</p>
-{% endif %}
+            <h3>Listed by {{ kitten.listing.owner.username|title }}<br>
 
-<p><strong>Spayed/Neutered:</strong>
-    {% if kitten.spayed %}
-        Yes
-    {% else %}
-        No
-    {% endif %}
-</p>
+            <strong>Status:</strong>  
+            {% if kitten.available %}
+                Available
+            {% else %}
+                Adopted
+            {% endif %} 
+            </h3>
 
-<p>{{ kitten.description }}</p>
+            {% if city and state %}
+                <p><strong>Location:</strong> {{ city }}, {{ state }}</p>
+            {% endif %}
+
+            {% if kitten.gender %}
+                <p><strong>Gender:</strong> {{ kitten.get_gender_display }}</p>
+            {% endif %}
+
+            <p><strong>Spayed/Neutered:</strong>
+                {% if kitten.spayed %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+
+            <p>{{ kitten.description }}</p>
+        </div>
+    </div>
+
+</body>
+</html>
